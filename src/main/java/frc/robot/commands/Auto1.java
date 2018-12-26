@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class Auto1 extends CommandGroup {
   /**
@@ -16,7 +15,7 @@ public class Auto1 extends CommandGroup {
    */
   public Auto1() {
     addSequential(new DriveStraightGyroSPI(.5, 0, 36));
-    //addSequential(new WaitCommand(10));
-    //addSequential(new DriveStraightGyroSPI(-.5, 0, -36));
+    addSequential(new Wait(10));
+    addSequential(new DriveStraightGyroSPI(-.5, 0, -36));
   }
 }

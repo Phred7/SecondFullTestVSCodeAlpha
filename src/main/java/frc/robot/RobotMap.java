@@ -57,12 +57,11 @@ public class RobotMap {
 
     driveR.setInverted(true);
 
-    //SpeedControllerGroup m_right = new SpeedControllerGroup(driveR);
-    //SpeedControllerGroup m_left = new SpeedControllerGroup(driveL);
+    SpeedControllerGroup m_right = new SpeedControllerGroup(driveR);
+    SpeedControllerGroup m_left = new SpeedControllerGroup(driveL);
 
-    //drive = new DifferentialDrive(m_left, m_right);
-    drive = new DifferentialDrive(driveL, driveR);
-
+    drive = new DifferentialDrive(m_left, m_right);
+    
   }
   
 }
