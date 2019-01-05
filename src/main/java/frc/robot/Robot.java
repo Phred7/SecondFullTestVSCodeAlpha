@@ -47,11 +47,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    Robot.drive.reset();
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    
   }
 
   @Override
@@ -89,5 +91,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
+    SmartDashboard.putNumber("Encoder 1 Value", Robot.drive.getEncL());
   }
 }

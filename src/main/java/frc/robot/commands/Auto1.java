@@ -10,9 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Auto1 extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
+ 
   public Auto1() {
     addSequential(new DriveStraightGyroSPI(.5, 0, 36));
     addSequential(new Wait(10));

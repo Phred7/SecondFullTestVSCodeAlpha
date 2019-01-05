@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class RobotMap {
@@ -23,7 +24,6 @@ public class RobotMap {
   public static VictorSP gb2;
 
   public static ADXRS450_Gyro gyroSPI;
-
   public static Encoder dtEncL;
   public static Encoder dtEncR;
   public static Encoder gbEnc1;
@@ -40,7 +40,7 @@ public class RobotMap {
 	public static final double driveStraightGainMultiplier = 0.03; //.03
 	public static final double driveStraightP = 0.45; //.45 //1.0 (12/23)
 	public static final double driveStraightI = 0.015; //.015 //1.0 (12/23)
-	public static final double driveStraightD = 0.011; //.011 //3.0 (12/23) //8.0(12/23-2)
+  public static final double driveStraightD = 0.011; //.011 //3.0 (12/23) //8.0(12/23-2)
 
   public static void init(){
 
@@ -49,9 +49,9 @@ public class RobotMap {
     gb1 = new VictorSP(2);
     gb2 = new VictorSP(3);
 
-    dtEncL = new Encoder(0, 1);
-    dtEncR = new Encoder(2, 3);
-    gbEnc1 = new Encoder(4, 5);
+    dtEncL = new Encoder(0, 1, false, EncodingType.k4X);
+    dtEncR = new Encoder(2, 3, true, EncodingType.k4X);
+    gbEnc1 = new Encoder(4, 5, false, EncodingType.k4X);
 
     gyroSPI = new ADXRS450_Gyro();
 

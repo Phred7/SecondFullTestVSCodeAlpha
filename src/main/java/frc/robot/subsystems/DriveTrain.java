@@ -24,12 +24,11 @@ public class DriveTrain extends Subsystem {
 
   Encoder encL = RobotMap.dtEncL;
   Encoder encR = RobotMap.dtEncR;
-
   ADXRS450_Gyro gyro = RobotMap.gyroSPI;
 
-  public void driveTrain() {
+  public void reset() {
     resetEncs();
-    rAndCGyro();
+    resetGyro();
   }
 
   public void resetEncR(){

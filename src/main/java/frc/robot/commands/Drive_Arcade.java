@@ -35,5 +35,6 @@ public class Drive_Arcade extends Command {
 
   @Override
   protected void interrupted() {
+    Robot.drive.stop();
   }
 }

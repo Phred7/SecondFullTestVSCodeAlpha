@@ -50,7 +50,7 @@ public class DriveTurnGyroSPI extends Command {
 		i = 0;
     pid = false;
     Robot.drive.stop();
-    Robot.drive.driveTrain();
+    Robot.drive.reset();
   }
 
   @Override
@@ -111,5 +111,6 @@ public class DriveTurnGyroSPI extends Command {
 
   @Override
   protected void interrupted() {
+		end();
   }
 }

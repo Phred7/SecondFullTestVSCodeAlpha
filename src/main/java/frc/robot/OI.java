@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DriveGearBoxes;
 
 public class OI {
   public Joystick joystick1;
@@ -22,8 +23,8 @@ public class OI {
     //joystick2 = new Joystick(1);
 
     trigr1 = new JoystickButton(joystick1, 1);
-    //trigr1.whenPressed(new Command());
-    //trigr1.whenReleased(new Command());
+    trigr1.whileHeld(new DriveGearBoxes(1.0, .5));
+    trigr1.whenReleased(new DriveGearBoxes(0.0, 0.0));
   }
 
   public Joystick getJoystick1(){

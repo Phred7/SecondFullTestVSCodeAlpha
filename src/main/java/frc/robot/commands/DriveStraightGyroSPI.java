@@ -23,7 +23,7 @@ public class DriveStraightGyroSPI extends Command {
 	double iAdjustment = 0;
 	double dAdjustment = 0;
 	double lastError = 0;
-  double PIDAdjustment = 0;
+  double pidAdjustment = 0;
   double distanceTraveled = 0;
   double distanceToTarget = 0;
   
@@ -34,13 +34,14 @@ public class DriveStraightGyroSPI extends Command {
     this.distance = distance * RobotMap.encCountsToIn;
     this.distance = (int) this.distance;
     System.out.println(this.distance);
+    SmartDashboard.putNumber("distance: ", this.distance);
     this.distanceToTarget = this.distance;
   }
 
   @Override
   protected void initialize() {
     Robot.drive.stop();
-    Robot.drive.driveTrain();
+    Robot.drive.reset();
     RobotMap.drive.setSafetyEnabled(false);
   }
 
@@ -52,29 +53,29 @@ public class DriveStraightGyroSPI extends Command {
     iAdjustment = iAdjustment + (error * RobotMap.driveStraightI * RobotMap.driveStraightGainMultiplier);
     dAdjustment = (error - lastError) * RobotMap.driveStraightD * RobotMap.driveStraightGainMultiplier;
     lastError = error;
-    PIDAdjustment = pAdjustment + iAdjustment + dAdjustment;
+    pidAdjustment = pAdjustment + iAdjustment + dAdjustment;
     distanceTraveled = Robot.drive.getEncL();
     distanceToTarget = distanceToTarget - distanceTraveled;
-    Robot.drive.tankDrive((motorSpeed - PIDAdjustment), (-(motorSpeed) - PIDAdjustment));
+    Robot.drive.tankDrive((motorSpeed - pidAdjustment), ((-motorSpeed) - pidAdjustment));
     SmartDashboard.putNumber("Error", error);
-    SmartDashboard.putNumber("Adjustment", PIDAdjustment);
+    SmartDashboard.putNumber("Adjustment", pidAdjustment);
     SmartDashboard.putNumber("Distance", distanceToTarget);
     System.out.println(Robot.drive.getEncL());
-
   }
 
   @Override
   protected boolean isFinished() {
-    return (Math.abs(Robot.drive.getEncL()) > ((Math.abs(distance))));
+    return (Math.abs(Robot.drive.getEncL()) > ((Math.abs(this.distance))));
   }
 
   @Override
   protected void end() {
     Robot.drive.stop();
-    RobotMap.drive.setSafetyEnabled(true);
+    //RobotMap.drive.setSafetyEnabled(true);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }
